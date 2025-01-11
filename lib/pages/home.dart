@@ -39,29 +39,49 @@ class _HomeState extends State<Home> {
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0), 
+          preferredSize: Size.fromHeight(4.0),
           child: Container(
-            color: Color(0xFFD9D9D9), 
+            decoration: BoxDecoration(
+              color: Color(0xFFD9D9D9),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             height: 1.0,
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Color(0xFFD9D9D9), // Replace with your desired color
+              width: 1.0, // Adjust the width as needed
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF1E88E5),
-        onTap: _onItemTapped,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        ),
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color(0xFF1E88E5),
+          onTap: _onItemTapped,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

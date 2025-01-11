@@ -6,6 +6,7 @@ import 'package:rcbg_real/pages/home.dart';
 import 'package:rcbg_real/pages/login.dart';
 import 'package:rcbg_real/pages/scan.dart';
 import 'package:rcbg_real/pages/summarized.dart';
+import 'package:rcbg_real/pages/record.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,13 +53,14 @@ class MyApp extends StatelessWidget {
       theme: lightmode,
       darkTheme: darkmode,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: '/auth',
+      initialRoute: '/home',
       routes: {
         '/auth': (context) => const Auth(),
         '/login': (context) => const Login(),
         '/home': (context) => const Home(),
         '/scan': (context) => const Scan(),
         '/summarized': (context) => const Summarized(),
+        '/record': (context) => const Record(),
       },
     );
   }
