@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rcbg_real/firebase_options.dart';
+import 'package:rcbg_real/pages/assessment.dart';
 import 'package:rcbg_real/pages/auth.dart';
 import 'package:rcbg_real/pages/home.dart';
 import 'package:rcbg_real/pages/login.dart';
 import 'package:rcbg_real/pages/scan.dart';
 import 'package:rcbg_real/pages/summarized.dart';
 import 'package:rcbg_real/pages/record.dart';
+import 'package:rcbg_real/pages/history.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,14 +56,16 @@ class MyApp extends StatelessWidget {
       theme: lightmode,
       darkTheme: darkmode,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: '/home',
+      initialRoute: '/auth',
       routes: {
         '/auth': (context) => const Auth(),
         '/login': (context) => const Login(),
         '/home': (context) => const Home(),
         '/scan': (context) => const Scan(),
         '/summarized': (context) => const Summarized(),
-        '/record': (context) => const Record(),
+        '/record': (context) => Record(),
+        '/history': (context) => History(),
+        '/assessment': (context) => Assessment(),
       },
     );
   }
