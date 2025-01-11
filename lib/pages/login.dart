@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rcbg_real/components/loginForm.dart';
 import 'package:rcbg_real/components/regForm.dart';
 
@@ -35,10 +36,9 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.rocket_launch,
-                size: 100,
-                color: Theme.of(context).colorScheme.inversePrimary,
+              Image.asset(
+                'assets/images/ECHO.png', // Replace with your image path
+                height: 100.0, // Adjust the height as needed
               ),
               SizedBox(
                 height: 20,
@@ -47,9 +47,9 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(20.0),
                 child: Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  color: Colors.white,
                   child: Column(
                     children: [
                       register
@@ -60,9 +60,10 @@ class _LoginState extends State<Login> {
                           text: !register
                               ? 'Don\'t have an account? '
                               : 'Already have an account? ',
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: Theme.of(context).colorScheme.primary),
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: Color(0xFF455A64),
+                          ),
                           children: [
                             TextSpan(
                               recognizer: TapGestureRecognizer()
@@ -72,10 +73,11 @@ class _LoginState extends State<Login> {
                                   });
                                 },
                               text: register ? 'Login here' : 'Register here',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold),
+                              style: GoogleFonts.dmSans(
+                                decoration: TextDecoration.underline,
+                                color: Color(0xFF455A64),
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),

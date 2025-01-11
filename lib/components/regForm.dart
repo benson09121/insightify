@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rcbg_real/components/inputText.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Regform extends StatefulWidget {
   final bool register;
@@ -46,10 +47,11 @@ class _RegformState extends State<Regform> {
             Text(
               'Register',
               textAlign: TextAlign.start,
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
+              style: GoogleFonts.dmSans(
+                color: Color(0xFF455A64),
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
             ),
             SizedBox(
               height: 20,
@@ -102,11 +104,17 @@ class _RegformState extends State<Regform> {
             ),
             MaterialButton(
               onPressed: register,
-              color: Theme.of(context).colorScheme.primary,
+              color: Color(0xFF1E88E5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('Register'),
+              child: Text(
+                    'Register',
+                    style: GoogleFonts.dmSans(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
             ),
           ],
         ),
