@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rcbg_real/components/inputText.dart';
 
-//test q lang -ge
 class LoginForm extends StatefulWidget {
   final bool register;
   const LoginForm({super.key, required this.register});
