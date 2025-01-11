@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rcbg_real/global.dart';
 
 class Summarized extends StatefulWidget {
   const Summarized({super.key});
@@ -129,6 +130,8 @@ class _SummarizedState extends State<Summarized> {
                         ),
                         TextButton(
                           onPressed: () {
+                            summarized = arg['extractedText'];
+                            Navigator.pop(context);
                             Navigator.pushNamed(context, '/record');
                           },
                           child: Text(

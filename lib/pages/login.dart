@@ -32,62 +32,65 @@ class _LoginState extends State<Login> {
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.rocket_launch,
-                size: 100,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.rocket_launch,
+                  size: 100,
                   color: Theme.of(context).colorScheme.inversePrimary,
-                  child: Column(
-                    children: [
-                      register
-                          ? Regform(register: register)
-                          : LoginForm(register: register),
-                      RichText(
-                        text: TextSpan(
-                          text: !register
-                              ? 'Don\'t have an account? '
-                              : 'Already have an account? ',
-                          style: TextStyle(
-                              fontSize: 10,
-                              color: Theme.of(context).colorScheme.primary),
-                          children: [
-                            TextSpan(
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  setState(() {
-                                    register = !register;
-                                  });
-                                },
-                              text: register ? 'Login here' : 'Register here',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                    child: Column(
+                      children: [
+                        register
+                            ? Regform(register: register)
+                            : LoginForm(register: register),
+                        RichText(
+                          text: TextSpan(
+                            text: !register
+                                ? 'Don\'t have an account? '
+                                : 'Already have an account? ',
+                            style: TextStyle(
+                                fontSize: 10,
+                                color: Theme.of(context).colorScheme.primary),
+                            children: [
+                              TextSpan(
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    setState(() {
+                                      register = !register;
+                                    });
+                                  },
+                                text: register ? 'Login here' : 'Register here',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
