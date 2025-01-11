@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Montserrat'));
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'RCBG Real',
       theme: lightmode,
       darkTheme: darkmode,

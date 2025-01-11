@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter/services.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,7 +15,22 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  
   int _selectedIndex = 0;
+  String extractedText = '';
+  final GenerativeModel _model = GenerativeModel(
+    model: 'gemini-1.5-flash-latest',
+    apiKey: 'AIzaSyDa4JxMPc1b1eDQV2-TAnTznxa9LGKSZLI',
+  );
+
+  Future<void> generateStory(String prompt) async {
+    final content = [Content.text(prompt)];
+    final response = await _model.generateContent(content);
+    setState(() {
+      extractedText = response.text.toString();
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -18,8 +38,37 @@ class _HomeState extends State<Home> {
     });
   }
 
+  late XFile? pickImage;
+  late String resultText;
+
+  Future<void> getImage(ImageSource imgSource) async {
+    try {
+      pickImage = (await ImagePicker().pickImage(source: imgSource))!;
+      if (pickImage != null) {
+        final inputImage = InputImage.fromFilePath(pickImage!.path);
+        final textRecognizer = TextRecognizer();
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        );       
+        final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+        await generateStory("Summarize thia: ${recognizedText.text}");
+        Navigator.of(context).pop();
+              Navigator.pushNamed(context, '/summarized', arguments: {'extractedText': extractedText});
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     logout() {
       FirebaseAuth.instance.signOut();
     }
@@ -57,6 +106,12 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      body: Center(
+        child: Text(
+          'Hello Wonderful World!',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -85,8 +140,11 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/scan');
+        onPressed: () async {
+          await getImage(ImageSource.camera);
+          if (pickImage != null) {
+         
+          }
         },
         child: Icon(Icons.document_scanner_outlined),
         backgroundColor: Color(0xFF1E88E5),
