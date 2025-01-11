@@ -27,6 +27,7 @@ class _SummarizedState extends State<Summarized> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
+          
           'SUMMARIZED TEXT',
           style: GoogleFonts.dmSans(
             fontWeight: FontWeight.bold,
