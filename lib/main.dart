@@ -7,6 +7,8 @@ import 'package:rcbg_real/firebase_options.dart';
 import 'package:rcbg_real/pages/auth.dart';
 import 'package:rcbg_real/pages/home.dart';
 import 'package:rcbg_real/pages/login.dart';
+import 'package:rcbg_real/pages/scan.dart';
+import 'package:rcbg_real/pages/summarized.dart';
 
 void main() async {
   // await dotenv.load(fileName: ".env");
@@ -70,6 +72,8 @@ class MyApp extends StatelessWidget {
         '/auth': (context) => const Auth(),
         '/login': (context) => const Login(),
         '/home': (context) => const Home(),
+        '/scan': (context) => const Scan(),
+        '/summarized': (context) => const Summarized(),
       },
     );
   }
