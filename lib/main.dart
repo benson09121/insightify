@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,6 +10,14 @@ import 'package:rcbg_real/pages/login.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+
+  String apiKey = dotenv.env['GOOGLE_SERVICES_API_KEY'] ?? '';
+
+  File googleServicesFile = File('android/app/google-services.json');
+  String content = await googleServicesFile.readAsString();
+
+  content = content.replaceAll('GOOGLE_SERVICES_API_KEY_PLACEHOLDER', apiKey);
+  await googleServicesFile.writeAsString(content);
 
   WidgetsFlutterBinding.ensureInitialized();
 
