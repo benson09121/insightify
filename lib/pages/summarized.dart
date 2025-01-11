@@ -26,18 +26,18 @@ class _SummarizedState extends State<Summarized> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('SUMMARIZED TEXT',
+        title: Text(
+          'SUMMARIZED TEXT',
           style: GoogleFonts.dmSans(
             fontWeight: FontWeight.bold,
             color: Color(0xFF455A64),
           ),
         ),
-        actions: [
-        ],
+        actions: [],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0), 
+          preferredSize: Size.fromHeight(4.0),
           child: Container(
-            color: Color(0xFFD9D9D9), 
+            color: Color(0xFFD9D9D9),
             height: 1.0,
           ),
         ),

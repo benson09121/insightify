@@ -26,7 +26,8 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home',
+        title: Text(
+          'Home',
           style: GoogleFonts.dmSans(
             fontWeight: FontWeight.bold,
             color: Color(0xFF455A64),
@@ -39,9 +40,9 @@ class _HomeState extends State<Home> {
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0), 
+          preferredSize: Size.fromHeight(4.0),
           child: Container(
-            color: Color(0xFFD9D9D9), 
+            color: Color(0xFFD9D9D9),
             height: 1.0,
           ),
         ),
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
           Navigator.pushNamed(context, '/scan');
         },
         child: Icon(Icons.document_scanner_outlined),
-        backgroundColor: Color(0xFF1E88E5), 
+        backgroundColor: Color(0xFF1E88E5),
         shape: CircleBorder(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
