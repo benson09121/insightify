@@ -20,6 +20,7 @@ class _SummarizedState extends State<Summarized> {
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
     logout() {
       FirebaseAuth.instance.signOut();
     }
@@ -79,7 +80,7 @@ class _SummarizedState extends State<Summarized> {
               ),
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'This is the summarized text.',
+                arg['extractedText'],
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.normal,
                   color: Color(0xFF455A64),
