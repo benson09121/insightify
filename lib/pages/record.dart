@@ -7,11 +7,12 @@ class Record extends StatefulWidget {
 }
 
 class _RecordPageState extends State<Record> {
-  bool isRecording = false;
+   bool isRecording = false;
   double progress = 0.0;
-  final List<double> _waveformData = [];
+  String? recordedFilePath;
 
-  void _toggleRecording() {
+
+   void _toggleRecording() {
     setState(() {
       isRecording = !isRecording;
       if (isRecording) {
@@ -24,11 +25,6 @@ class _RecordPageState extends State<Record> {
         // Add your stop recording logic here
       }
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -66,7 +62,7 @@ class _RecordPageState extends State<Record> {
           //   height: 100.0,
           //   width: double.infinity,
           //   child: AudioWaveforms(
-          //     waveData: _waveformData,
+          //     controller: recorderController,
           //     size: Size(double.infinity, 100.0),
           //     waveStyle: WaveStyle(
           //       waveColor: Color(0xFF1E88E5),
