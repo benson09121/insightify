@@ -55,34 +55,34 @@ class _LoginState extends State<Login> {
                       register
                           ? Regform(register: register)
                           : LoginForm(register: register),
-                      // RichText(
-                      //   text: TextSpan(
-                      //     text: !register
-                      //         ? 'Don\'t have an account? '
-                      //         : 'Already have an account? ',
-                      //     style: TextStyle(
-                      //         fontSize: 10,
-                      //         color: Theme.of(context).colorScheme.primary),
-                      //     children: [
-                      //       TextSpan(
-                      //         recognizer: TapGestureRecognizer()
-                      //           ..onTap = () {
-                      //             setState(() {
-                      //               register = !register;
-                      //             });
-                      //           },
-                      //         text: register ? 'Login here' : 'Register here',
-                      //         style: TextStyle(
-                      //             decoration: TextDecoration.underline,
-                      //             color: Theme.of(context).colorScheme.primary,
-                      //             fontWeight: FontWeight.bold),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
+                      RichText(
+                        text: TextSpan(
+                          text: !register
+                              ? 'Don\'t have an account? '
+                              : 'Already have an account? ',
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: Theme.of(context).colorScheme.primary),
+                          children: [
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  setState(() {
+                                    register = !register;
+                                  });
+                                },
+                              text: register ? 'Login here' : 'Register here',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
