@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const Home(),
         '/scan': (context) => const Scan(),
         '/summarized': (context) => const Summarized(),
-        '/record': (context) => const Record(),
+        '/record': (context) => Record(),
       },
     );
   }
