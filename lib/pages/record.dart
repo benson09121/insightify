@@ -7,12 +7,11 @@ class Record extends StatefulWidget {
 }
 
 class _RecordPageState extends State<Record> {
-   bool isRecording = false;
+  bool isRecording = false;
   double progress = 0.0;
   String? recordedFilePath;
 
-
-   void _toggleRecording() {
+  void _toggleRecording() {
     setState(() {
       isRecording = !isRecording;
       if (isRecording) {
@@ -27,11 +26,20 @@ class _RecordPageState extends State<Record> {
     });
   }
 
+  void _saveRecording() {
+    // Add your save recording logic here
+    print('Recording saved');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Record'),
+        title: Text('RECORD', style: GoogleFonts.dmSans(
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF455A64),
+          fontSize: 16.0,
+        )),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,6 +92,20 @@ class _RecordPageState extends State<Record> {
             ),
             iconSize: 60, // Adjust the size of the IconButton
             onPressed: _toggleRecording,
+          ),
+          SizedBox(height: 20.0),
+          IconButton(
+            icon: CircleAvatar(
+              radius: 30, // Adjust the radius to make it circular
+              backgroundColor: Color(0xFF1E88E5),
+              child: Icon(
+                Icons.save,
+                color: Colors.white,
+                size: 30, // Adjust the size of the icon
+              ),
+            ),
+            iconSize: 60, // Adjust the size of the IconButton
+            onPressed: _saveRecording,
           ),
         ],
       ),

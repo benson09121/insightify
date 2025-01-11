@@ -1,15 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
+class History extends StatefulWidget {
   @override
-  State<Home> createState() => _HomeState();
+  _HistoryPageState createState() => _HistoryPageState();
 }
 
-class _HomeState extends State<Home> {
+class _HistoryPageState extends State<History> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -29,22 +26,16 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    logout() {
-      FirebaseAuth.instance.signOut();
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/ECHO.png', // Replace with your image path
-          height: 40.0, // Adjust the height as needed
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: logout,
+        title: Text(
+          'HISTORY',
+          style: GoogleFonts.dmSans(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF455A64), // Adjust the color as needed
+            fontSize: 16.0, // Adjust the font size as needed
           ),
-        ],
+        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(4.0),
           child: Container(
@@ -63,58 +54,21 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: ListView(
           children: [
-            Stack(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end, // Align the icon to the right
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 200.0, // Set the height to 200
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10.0), // Add rounded edges with a radius of 10
-                  ),
+                IconButton(
+                  icon: Icon(Icons.filter_list),
+                  onPressed: () {
+                    // Add your filter functionality here
+                  },
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0), // Add padding if needed
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Good day, User!',
-                          style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white, // Adjust the color to make it visible on the image
-                            fontSize: 24.0,
-                          ),
-                        ),
-                        Text(
-                          'Welcome back!',
-                          style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white, // Adjust the color to make it visible on the image
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                SizedBox(width: 5.0), // Add some space between the icon and the SizedBox
               ],
-            ),
-            SizedBox(height: 30.0),
-            Text(
-              'Popular',
-              style: GoogleFonts.dmSans(
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF455A64),
-                fontSize: 20.0,
-              ),
             ),
             SizedBox(height: 5.0),
             ListView.builder(
@@ -183,7 +137,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
