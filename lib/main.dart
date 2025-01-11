@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rcbg_real/firebase_options.dart';
+import 'package:rcbg_real/pages/assessment.dart';
 import 'package:rcbg_real/pages/auth.dart';
 import 'package:rcbg_real/pages/home.dart';
 import 'package:rcbg_real/pages/login.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
       theme: lightmode,
       darkTheme: darkmode,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: '/home',
+      initialRoute: '/auth',
       routes: {
         '/auth': (context) => const Auth(),
         '/login': (context) => const Login(),
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
         '/scan': (context) => const Scan(),
         '/summarized': (context) => const Summarized(),
         '/record': (context) => const Record(),
+        '/assessment': (context) => Assessment(),
       },
     );
   }

@@ -27,7 +27,6 @@ class _SummarizedState extends State<Summarized> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          
           'SUMMARIZED TEXT',
           style: GoogleFonts.dmSans(
             fontWeight: FontWeight.bold,
@@ -101,14 +100,16 @@ class _SummarizedState extends State<Summarized> {
                         'Confirmation',
                         style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF455A64), // Change this to your desired color
+                          color: Color(
+                              0xFF455A64), // Change this to your desired color
                         ),
                       ),
                       content: Text(
                         'Do you want to proceed?',
                         style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.normal,
-                          color: Color(0xFF455A64), // Change this to your desired color
+                          color: Color(
+                              0xFF455A64), // Change this to your desired color
                         ),
                       ),
                       actions: [
@@ -120,7 +121,8 @@ class _SummarizedState extends State<Summarized> {
                             'Cancel',
                             style: GoogleFonts.dmSans(
                               fontWeight: FontWeight.bold,
-                              color: Colors.red, // Change this to your desired color
+                              color: Colors
+                                  .red, // Change this to your desired color
                             ),
                           ),
                         ),
@@ -132,7 +134,8 @@ class _SummarizedState extends State<Summarized> {
                             'Proceed',
                             style: GoogleFonts.dmSans(
                               fontWeight: FontWeight.bold,
-                              color: Colors.green, // Change this to your desired color
+                              color: Colors
+                                  .green, // Change this to your desired color
                             ),
                           ),
                         ),
@@ -145,7 +148,8 @@ class _SummarizedState extends State<Summarized> {
                 backgroundColor: Color(0xFF1E88E5),
                 minimumSize: Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0), // Add rounded edges
+                  borderRadius:
+                      BorderRadius.circular(10.0), // Add rounded edges
                 ),
               ),
               child: Text(
