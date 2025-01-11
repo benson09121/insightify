@@ -1,26 +1,11 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:rcbg_real/firebase_options.dart';
 import 'package:rcbg_real/pages/auth.dart';
 import 'package:rcbg_real/pages/home.dart';
 import 'package:rcbg_real/pages/login.dart';
 
 void main() async {
-  // await dotenv.load(fileName: ".env");
-
-  // String apiKey = dotenv.env['GOOGLE_SERVICES_API_KEY'] ?? '';
-
-  // print(apiKey);
-
-  // File googleServicesFile = File('android/app/google-services.json');
-  // String content = await googleServicesFile.readAsString();
-
-  // content = content.replaceAll('GOOGLE_SERVICES_API_KEY_PLACEHOLDER', apiKey);
-  // await googleServicesFile.writeAsString(content);
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -61,7 +46,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Montserrat'));
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RCBG Real',
       theme: lightmode,
       darkTheme: darkmode,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
