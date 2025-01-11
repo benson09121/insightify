@@ -86,34 +86,45 @@ class _LoginFormState extends State<LoginForm> {
             SizedBox(
               height: 20,
             ),
-            // Inputtext(
-            //   hintText: 'Email',
-            //   obscureText: false,
-            //   controller: emailCon,
-            //   validator: (val) {
-            //     if (val == null || val.isEmpty) {
-            //       return 'Please enter your email';
-            //     }
-            //     return null;
-            //   },
-            // ),
-            // SizedBox(
-            //   height: 10,
-            // ),
-            // Inputtext(
-            //   hintText: 'Password',
-            //   obscureText: true,
-            //   controller: passCon,
-            //   validator: (val) {
-            //     if (val == null || val.isEmpty) {
-            //       return 'Please enter your password';
-            //     }
-            //     return null;
-            //   },
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
+            Inputtext(
+              hintText: 'Email',
+              obscureText: false,
+              controller: emailCon,
+              validator: (val) {
+                if (val == null || val.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Inputtext(
+              hintText: 'Password',
+              obscureText: true,
+              controller: passCon,
+              validator: (val) {
+                if (val == null || val.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            MaterialButton(
+              onPressed: login,
+              color: Theme.of(context).colorScheme.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('Login'),
+            ),
+            Divider(
+              color: Colors.grey,
+            ),
             MaterialButton(
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               onPressed: googleLogin,
