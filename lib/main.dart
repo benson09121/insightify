@@ -8,6 +8,7 @@ import 'package:rcbg_real/pages/login.dart';
 import 'package:rcbg_real/pages/scan.dart';
 import 'package:rcbg_real/pages/summarized.dart';
 import 'package:rcbg_real/pages/record.dart';
+import 'package:rcbg_real/pages/history.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const Home(),
         '/scan': (context) => const Scan(),
         '/summarized': (context) => const Summarized(),
-        '/record': (context) => const Record(),
+        '/record': (context) => Record(),
+        '/history': (context) => History(),
         '/assessment': (context) => Assessment(),
       },
     );
