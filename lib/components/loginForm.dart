@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rcbg_real/components/inputText.dart';
 
-//test q lang -ge
 class LoginForm extends StatefulWidget {
   final bool register;
   const LoginForm({super.key, required this.register});
