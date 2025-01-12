@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,14 +25,6 @@ class _AssessmentState extends State<Assessment> {
 
     TextEditingController nameController = TextEditingController();
     var formkey = GlobalKey<FormState>();
-
-    String comment() {
-      if (percent > 70) {
-        return "It looks like you have a great mastery on the topic.";
-      } else {
-        return "You likely need to spend more time on studying the concept of the text";
-      }
-    }
 
     saveDialog() {
       saveRecording() {
