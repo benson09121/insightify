@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
         );
         final RecognizedText recognizedText =
             await textRecognizer.processImage(inputImage);
-        await generateStory("Summarize thia: ${recognizedText.text}");
+        await generateStory("Summarize this: ${recognizedText.text}");
         Navigator.of(context).pop();
         Navigator.pushNamed(context, '/summarized',
             arguments: {'extractedText': extractedText});
