@@ -47,6 +47,7 @@ class _HistoryPageState extends State<History> {
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(4.0),
               child: Container(
+                // height: 1.0,
                 decoration: BoxDecoration(
                   color: Color(0xFFD9D9D9),
                   boxShadow: [
@@ -58,22 +59,26 @@ class _HistoryPageState extends State<History> {
                     ),
                   ],
                 ),
-                height: 1.0,
               ),
             ),
           ),
-          body: Expanded(
-              child: ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (context, index) {
-                    Timestamp timestamp =
-                        snapshot.data!.docs[index]['date_created'];
-                    DateTime dateTime = timestamp.toDate();
-
-                    // Format DateTime to a human-readable format
-                    String formattedDate =
-                        DateFormat('yyyy-MM-dd – kk:mm').format(dateTime);
-                    return Card(
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ListView.builder(
+                itemCount: snapshot.data?.docs.length ?? 0,
+                itemBuilder: (context, index) {
+                  Timestamp timestamp =
+                      snapshot.data!.docs[index]['date_created'];
+                  DateTime? dateTime = timestamp.toDate();
+                  String formattedDate =
+                      DateFormat('MMM d, yyyy').format(dateTime);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/summarized', arguments: {
+                        'extractedText': snapshot.data!.docs[index]['sumText'],
+                      });
+                    },
+                    child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10.0), // Rounded edges
@@ -122,8 +127,10 @@ class _HistoryPageState extends State<History> {
                           ],
                         ),
                       ),
-                    );
-                  })),
+                    ),
+                  );
+                }),
+          ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               border: Border(
@@ -152,16 +159,16 @@ class _HistoryPageState extends State<History> {
               showUnselectedLabels: false,
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/scan');
-            },
-            child: Icon(Icons.document_scanner_outlined),
-            backgroundColor: Color(0xFF1E88E5),
-            shape: CircleBorder(),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, '/scan');
+          //   },
+          //   backgroundColor: Color(0xFF1E88E5),
+          //   shape: CircleBorder(),
+          //   child: Icon(Icons.document_scanner_outlined),
+          // ),
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerDocked,
         );
       },
     );

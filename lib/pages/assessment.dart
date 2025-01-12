@@ -1,5 +1,8 @@
 // import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -19,7 +22,7 @@ class _AssessmentState extends State<Assessment> {
   Widget build(BuildContext context) {
     // var per = result!.substring(1, result!.length - 2).split(',')[2];
     // var finalRes = jsonDecode(result);
-    print(result);
+    // print(result);
     double percent = double.parse(result) / 100;
     bool isPublic = false;
 
@@ -30,6 +33,15 @@ class _AssessmentState extends State<Assessment> {
       saveRecording() {
         if (formkey.currentState!.validate()) {
           // good
+
+          FirebaseFirestore.instance.collection('results').add({
+            'email': FirebaseAuth.instance.currentUser!.email,
+            'name': nameController.text,
+            'score': percent * 100,
+            'isPublic': isPublic,
+            'date_created': DateTime.now(),
+          });
+
           // clse dialog
           Navigator.pop(context);
         }
@@ -44,7 +56,7 @@ class _AssessmentState extends State<Assessment> {
               return AlertDialog(
                 actionsAlignment: MainAxisAlignment.center,
                 title: Text(
-                  'SAVE VOICE RECORDING',
+                  'SAVE RESULT',
                   style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF455A64),
@@ -143,101 +155,108 @@ class _AssessmentState extends State<Assessment> {
 
     return Scaffold(
       appBar: const Appbar(title: 'ASSESSMENT'),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'YOUR RESULTS ARE',
-                style: GoogleFonts.dmSans(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF455A64),
-                  fontSize: 16.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 50.0),
+                Text(
+                  'YOUR RESULTS ARE',
+                  style: GoogleFonts.dmSans(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF455A64),
+                    fontSize: 16.0,
+                  ),
                 ),
-              ),
-              SizedBox(height: 50.0),
-              CircularPercentIndicator(
-                  radius: 120.0,
-                  lineWidth: 20.0,
-                  percent: percent,
-                  progressColor: percent > .7
-                      ? Color.fromRGBO(67, 160, 71, 1)
-                      : Color.fromRGBO(203, 31, 19, 1),
-                  circularStrokeCap: CircularStrokeCap.round,
-                  center: Text(
-                    '${percent * 100}%',
+                SizedBox(height: 50.0),
+                CircularPercentIndicator(
+                    radius: 120.0,
+                    lineWidth: 20.0,
+                    percent: percent,
+                    progressColor: percent > .7
+                        ? Color.fromRGBO(67, 160, 71, 1)
+                        : Color.fromRGBO(203, 31, 19, 1),
+                    circularStrokeCap: CircularStrokeCap.round,
+                    center: Text(
+                      '${percent * 100}%',
+                      style: GoogleFonts.dmSans(
+                        fontWeight: FontWeight.bold,
+                        color: percent > .7
+                            ? Color.fromRGBO(67, 160, 71, 1)
+                            : Color.fromRGBO(203, 31, 19, 1),
+                        fontSize: 50.0,
+                      ),
+                    )),
+                SizedBox(height: 20.0),
+                Text(
+                  percent > .7 ? 'Congratulations!' : 'You need to improve.',
+                  style: GoogleFonts.dmSans(
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xFF455A64),
+                    fontSize: 16.0,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  percent > .7
+                      ? "It looks like you have a great mastery on the topic."
+                      : "You likely need to spend more time on studying the concept of the text",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.dmSans(
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xFF455A64),
+                    fontSize: 16.0,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: saveDialog,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF1E88E5),
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Add rounded edges
+                    ),
+                  ),
+                  child: Text(
+                    'SAVE',
                     style: GoogleFonts.dmSans(
                       fontWeight: FontWeight.bold,
-                      color: percent > .7
-                          ? Color.fromRGBO(67, 160, 71, 1)
-                          : Color.fromRGBO(203, 31, 19, 1),
-                      fontSize: 50.0,
+                      color: Colors.white,
+                      fontSize: 16.0,
                     ),
-                  )),
-              SizedBox(height: 20.0),
-              Text(
-                percent > .7 ? 'Congratulations!' : 'You need to improve.',
-                style: GoogleFonts.dmSans(
-                  fontWeight: FontWeight.normal,
-                  color: Color(0xFF455A64),
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Text(
-                percent > .7
-                    ? "It looks like you have a great mastery on the topic."
-                    : "You likely need to spend more time on studying the concept of the text",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.dmSans(
-                  fontWeight: FontWeight.normal,
-                  color: Color(0xFF455A64),
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: saveDialog,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1E88E5),
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add rounded edges
                   ),
                 ),
-                child: Text(
-                  'SAVE',
-                  style: GoogleFonts.dmSans(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 16.0,
+                SizedBox(height: 20.0),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF455A64),
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Add rounded edges
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF455A64),
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(10.0), // Add rounded edges
+                  child: Text(
+                    'HOME',
+                    style: GoogleFonts.dmSans(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
                   ),
-                ),
-                child: Text(
-                  'HOME',
-                  style: GoogleFonts.dmSans(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

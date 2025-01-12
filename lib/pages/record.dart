@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -14,6 +16,7 @@ bool speechEnabled = false;
 String wordsSpoken = '';
 double confiLevel = 0;
 bool isListening = false;
+bool isClicked = false;
 
 class _RecordPageState extends State<Record> {
   final GenerativeModel _model = GenerativeModel(
@@ -41,6 +44,10 @@ class _RecordPageState extends State<Record> {
   }
 
   startListening() async {
+    setState(() {
+      isClicked = true;
+    });
+
     await speechToText.listen(
       onResult: onSpeechResult,
     );
@@ -80,18 +87,18 @@ class _RecordPageState extends State<Record> {
 
   String getImagePath() {
     if (!speechToText.isListening && wordsSpoken == '') {
-      return 'assets/images/default.jpg';
+      return 'assets/images/default.png';
     }
     if (speechToText.isListening) {
-      return 'assets/images/listening.jpg';
+      return 'assets/images/listening.png';
     }
     if (!speechToText.isListening && wordsSpoken != '' && confiLevel > 70) {
-      return 'assets/images/lowConfi.jpg';
+      return 'assets/images/lowConfi.png';
     }
     if (!speechToText.isListening && wordsSpoken != '' && confiLevel < 70) {
-      return 'assets/images/highConfi.jpg';
+      return 'assets/images/highConfi.png';
     } else {
-      return 'assets/images/default.jpg';
+      return 'assets/images/default.png';
     }
   }
 
@@ -114,6 +121,19 @@ class _RecordPageState extends State<Record> {
 
   @override
   Widget build(BuildContext context) {
+    if (isClicked) {
+      // Timer.periodic(Duration(seconds: 1), (timer) {
+      //   if (!mounted) {
+      //     timer.cancel();
+      //   } else {
+      //     setState(() {
+      //       isListening = speechToText.isListening;
+      //     });
+      //   }
+      //   print('jdjjdd');
+      // });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('RECORD',
@@ -143,7 +163,7 @@ class _RecordPageState extends State<Record> {
               RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                      text: 'Sana: ',
+                      text: 'Echo: ',
                       style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF455A64),
