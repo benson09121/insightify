@@ -133,33 +133,33 @@ class _LoginFormState extends State<LoginForm> {
             Divider(
               color: Colors.grey,
             ),
-            MaterialButton(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              onPressed: googleLogin,
-              color: Color(0xFF1E88E5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/icon/google.png',
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Login with Google',
-                    style: GoogleFonts.dmSans(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // MaterialButton(
+            //   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            //   onPressed: googleLogin,
+            //   color: Color(0xFF1E88E5),
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Row(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       Image.asset(
+            //         'assets/icon/google.png',
+            //         height: 20,
+            //       ),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         'Login with Google',
+            //         style: GoogleFonts.dmSans(
+            //           color: Colors.white,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             // TextButton(
             //   onPressed: () {},
             //   child: Text(

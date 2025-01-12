@@ -12,6 +12,7 @@ class Summarized extends StatefulWidget {
 }
 
 class _SummarizedState extends State<Summarized> {
+  bool isSaved = false;
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
@@ -120,16 +121,16 @@ class _SummarizedState extends State<Summarized> {
                         ),
                         TextButton(
                           onPressed: () {
-                            var uid = FirebaseAuth.instance.currentUser!.uid;
+                            // var uid = FirebaseAuth.instance.currentUser!.uid;
                             summarized = arg['extractedText'];
-                            FirebaseFirestore.instance
-                                .collection('summarized')
-                                .add({
-                              'uid': uid,
-                              'email': FirebaseAuth.instance.currentUser!.email,
-                              'sumText': arg['extractedText'],
-                              'date_created': DateTime.now()
-                            });
+                            // FirebaseFirestore.instance
+                            //     .collection('summarized')
+                            //     .add({
+                            //   'uid': uid,
+                            //   'email': FirebaseAuth.instance.currentUser!.email,
+                            //   'sumText': arg['extractedText'],
+                            //   'date_created': DateTime.now()
+                            // });
                             Navigator.pop(context);
                             Navigator.pushNamed(context, '/record');
                           },
@@ -168,17 +169,21 @@ class _SummarizedState extends State<Summarized> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {
-                var uid = FirebaseAuth.instance.currentUser!.uid;
-                summarized = arg['extractedText'];
-                FirebaseFirestore.instance.collection('summarized').add({
-                  'uid': uid,
-                  'email': FirebaseAuth.instance.currentUser!.email,
-                  'sumText': arg['extractedText'],
-                  'date_created': DateTime.now()
-                });
-                Navigator.pop(context);
-              },
+              onPressed: isSaved
+                  ? () {}
+                  : () {
+                      var uid = FirebaseAuth.instance.currentUser!.uid;
+                      summarized = arg['extractedText'];
+                      FirebaseFirestore.instance.collection('summarized').add({
+                        'uid': uid,
+                        'email': FirebaseAuth.instance.currentUser!.email,
+                        'sumText': arg['extractedText'],
+                        'date_created': DateTime.now()
+                      });
+                      setState(() {
+                        isSaved = true;
+                      });
+                    },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromARGB(255, 14, 69, 117),
                 minimumSize: Size(double.infinity, 50),
@@ -188,7 +193,7 @@ class _SummarizedState extends State<Summarized> {
                 ),
               ),
               child: Text(
-                'SAVE ONLY',
+                isSaved ? 'SAVED TO HISTORY' : 'SAVE',
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
