@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rcbg_real/global.dart';
 
 class Summarized extends StatefulWidget {
   const Summarized({super.key});
@@ -10,20 +12,9 @@ class Summarized extends StatefulWidget {
 }
 
 class _SummarizedState extends State<Summarized> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
-    logout() {
-      FirebaseAuth.instance.signOut();
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -57,11 +48,11 @@ class _SummarizedState extends State<Summarized> {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Container(
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: ListView(
+          children: [
+            Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12.0),
@@ -88,10 +79,10 @@ class _SummarizedState extends State<Summarized> {
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(30.0),
-            child: ElevatedButton(
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
               onPressed: () {
                 showDialog(
                   context: context,
@@ -129,6 +120,17 @@ class _SummarizedState extends State<Summarized> {
                         ),
                         TextButton(
                           onPressed: () {
+                            var uid = FirebaseAuth.instance.currentUser!.uid;
+                            summarized = arg['extractedText'];
+                            FirebaseFirestore.instance
+                                .collection('summarized')
+                                .add({
+                              'uid': uid,
+                              'email': FirebaseAuth.instance.currentUser!.email,
+                              'sumText': arg['extractedText'],
+                              'date_created': DateTime.now()
+                            });
+                            Navigator.pop(context);
                             Navigator.pushNamed(context, '/record');
                           },
                           child: Text(
@@ -162,8 +164,40 @@ class _SummarizedState extends State<Summarized> {
                 ),
               ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                var uid = FirebaseAuth.instance.currentUser!.uid;
+                summarized = arg['extractedText'];
+                FirebaseFirestore.instance.collection('summarized').add({
+                  'uid': uid,
+                  'email': FirebaseAuth.instance.currentUser!.email,
+                  'sumText': arg['extractedText'],
+                  'date_created': DateTime.now()
+                });
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 14, 69, 117),
+                minimumSize: Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // Add rounded edges
+                ),
+              ),
+              child: Text(
+                'SAVE ONLY',
+                style: GoogleFonts.dmSans(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

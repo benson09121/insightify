@@ -1,8 +1,11 @@
+// import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rcbg_real/components/appBar.dart';
 import 'package:rcbg_real/components/inputText2.dart';
+import 'package:rcbg_real/global.dart';
 
 class Assessment extends StatefulWidget {
   const Assessment({super.key});
@@ -14,8 +17,10 @@ class Assessment extends StatefulWidget {
 class _AssessmentState extends State<Assessment> {
   @override
   Widget build(BuildContext context) {
-    double percent = 0.71;
-    String comment = 'huhuahah';
+    // var per = result!.substring(1, result!.length - 2).split(',')[2];
+    // var finalRes = jsonDecode(result);
+    print(result);
+    double percent = double.parse(result) / 100;
     bool isPublic = false;
 
     TextEditingController nameController = TextEditingController();
@@ -182,7 +187,9 @@ class _AssessmentState extends State<Assessment> {
               ),
               SizedBox(height: 20.0),
               Text(
-                comment,
+                percent > .7
+                    ? "It looks like you have a great mastery on the topic."
+                    : "You likely need to spend more time on studying the concept of the text",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.normal,

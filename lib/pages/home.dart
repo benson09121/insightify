@@ -15,8 +15,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  
   int _selectedIndex = 0;
   String extractedText = '';
   final GenerativeModel _model = GenerativeModel(
@@ -42,7 +40,8 @@ class _HomeState extends State<Home> {
         Navigator.pushNamed(context, '/home'); // Replace with your home route
         break;
       case 1:
-        Navigator.pushNamed(context, '/history'); // Replace with your timer route
+        Navigator.pushNamed(
+            context, '/history'); // Replace with your timer route
         break;
     }
   }
@@ -64,11 +63,13 @@ class _HomeState extends State<Home> {
               child: CircularProgressIndicator(),
             );
           },
-        );       
-        final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+        );
+        final RecognizedText recognizedText =
+            await textRecognizer.processImage(inputImage);
         await generateStory("Summarize thia: ${recognizedText.text}");
         Navigator.of(context).pop();
-              Navigator.pushNamed(context, '/summarized', arguments: {'extractedText': extractedText});
+        Navigator.pushNamed(context, '/summarized',
+            arguments: {'extractedText': extractedText});
       }
     } catch (e) {
       print(e.toString());
@@ -77,7 +78,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     logout() {
       FirebaseAuth.instance.signOut();
     }
@@ -123,21 +123,24 @@ class _HomeState extends State<Home> {
                   height: 200.0, // Set the height to 200
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10.0), // Add rounded edges with a radius of 10
+                    borderRadius: BorderRadius.circular(
+                        10.0), // Add rounded edges with a radius of 10
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0), // Add padding if needed
+                    padding:
+                        const EdgeInsets.all(16.0), // Add padding if needed
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Good day, User!',
+                          'Good day, ${FirebaseAuth.instance.currentUser!.displayName ?? FirebaseAuth.instance.currentUser!.email}!',
                           style: GoogleFonts.dmSans(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Adjust the color to make it visible on the image
+                            color: Colors
+                                .white, // Adjust the color to make it visible on the image
                             fontSize: 24.0,
                           ),
                         ),
@@ -145,7 +148,8 @@ class _HomeState extends State<Home> {
                           'Welcome back!',
                           style: GoogleFonts.dmSans(
                             fontWeight: FontWeight.normal,
-                            color: Colors.white, // Adjust the color to make it visible on the image
+                            color: Colors
+                                .white, // Adjust the color to make it visible on the image
                             fontSize: 18.0,
                           ),
                         ),
@@ -178,7 +182,8 @@ class _HomeState extends State<Home> {
                   elevation: 1, // Add shadow
                   margin: EdgeInsets.only(bottom: 16.0), // Space between cards
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0), // Add padding inside the card
+                    padding: const EdgeInsets.all(
+                        16.0), // Add padding inside the card
                     child: Row(
                       children: [
                         // First column with two text widgets
@@ -262,9 +267,7 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await getImage(ImageSource.camera);
-          if (pickImage != null) {
-         
-          }
+          if (pickImage != null) {}
         },
         child: Icon(Icons.document_scanner_outlined),
         backgroundColor: Color(0xFF1E88E5),

@@ -33,63 +33,65 @@ class _LoginState extends State<Login> {
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/ECHO.png', // Replace with your image path
-                height: 100.0, // Adjust the height as needed
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      register
-                          ? Regform(register: register)
-                          : LoginForm(register: register),
-                      RichText(
-                        text: TextSpan(
-                          text: !register
-                              ? 'Don\'t have an account? '
-                              : 'Already have an account? ',
-                          style: GoogleFonts.dmSans(
-                            fontSize: 10,
-                            color: Color(0xFF455A64),
-                          ),
-                          children: [
-                            TextSpan(
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  setState(() {
-                                    register = !register;
-                                  });
-                                },
-                              text: register ? 'Login here' : 'Register here',
-                              style: GoogleFonts.dmSans(
-                                decoration: TextDecoration.underline,
-                                color: Color(0xFF455A64),
-                                fontWeight: FontWeight.bold,
-                              ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/ECHO.png', // Replace with your image path
+                  height: 100.0, // Adjust the height as needed
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        register
+                            ? Regform(register: register)
+                            : LoginForm(register: register),
+                        RichText(
+                          text: TextSpan(
+                            text: !register
+                                ? 'Don\'t have an account? '
+                                : 'Already have an account? ',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: Color(0xFF455A64),
                             ),
-                          ],
+                            children: [
+                              TextSpan(
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    setState(() {
+                                      register = !register;
+                                    });
+                                  },
+                                text: register ? 'Login here' : 'Register here',
+                                style: GoogleFonts.dmSans(
+                                  decoration: TextDecoration.underline,
+                                  color: Color(0xFF455A64),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
